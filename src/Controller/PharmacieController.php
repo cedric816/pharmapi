@@ -139,7 +139,32 @@ class PharmacieController extends AbstractController
      */
     public function garde(): Response
     {
-        $pharmaGarde = $this->pharmaRepo->findGarde();
+        $jour = '';
+        $numeroJour = date('N');
+        switch ($numeroJour) {
+            case 1:
+                $jour = '%lundi%';
+                break;
+            case 2:
+                $jour = '%mardi%';
+                break;
+            case 3:
+                $jour = '%mrecredi%';
+                break;
+            case 4:
+                $jour = '%jeudi%';
+                break;
+            case 5:
+                $jour = '%vendredi%';
+                break;
+            case 6:
+                $jour = '%samedi%';
+                break;
+            case 7:
+                $jour = '%dimanche%';
+                break;
+        }
+        $pharmaGarde = $this->pharmaRepo->findGarde($jour);
 
         if ($pharmaGarde==null){
             return $this->json([

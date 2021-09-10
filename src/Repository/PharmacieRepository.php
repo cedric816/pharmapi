@@ -19,33 +19,8 @@ class PharmacieRepository extends ServiceEntityRepository
         parent::__construct($registry, Pharmacie::class);
     }
 
-    public function findGarde()
+    public function findGarde($jour)
     {
-        $jour = '';
-        $numeroJour = date('N');
-        switch ($numeroJour) {
-            case 1:
-                $jour = '%lundi%';
-                break;
-            case 2:
-                $jour = '%mardi%';
-                break;
-            case 3:
-                $jour = '%mrecredi%';
-                break;
-            case 4:
-                $jour = '%jeudi%';
-                break;
-            case 5:
-                $jour = '%vendredi%';
-                break;
-            case 6:
-                $jour = '%samedi%';
-                break;
-            case 7:
-                $jour = '%dimanche%';
-                break;
-        }
         return $this->createQueryBuilder('p')
             ->andWhere('p.garde LIKE :val')
             ->setParameter('val', $jour)
